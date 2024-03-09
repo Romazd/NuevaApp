@@ -1,0 +1,25 @@
+name: File Existence Check
+
+on: [push]
+
+jobs:
+  check-file-existence:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Check for test_file.txt
+      id: checkfile
+      run: |
+        if [ -f "test_file.txt" ]; then
+          echo "File exists."
+          echo "test_result=true" >> $GITHUB_ENV
+        else
+          echo "File does not exist."
+          echo "test_result=false" >> $GITHUB_ENV
+        fi
+
+    - name: Set outcome
+      run: echo "The test result is ${{ env.test_result }}"
