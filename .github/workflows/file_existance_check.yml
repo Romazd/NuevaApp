@@ -19,6 +19,7 @@ jobs:
         else
           echo "File does not exist."
           echo "test_result=false" >> $GITHUB_ENV
+          exit 1 # Causes the step to fail if the file does not exist
         fi
 
     - name: Set outcome
